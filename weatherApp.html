@@ -33,7 +33,7 @@
 
     // Get data from Aeris API based on location
     function searchAPI(location) {
-      $.get('http://api.aerisapi.com/observations/' + location + '?client_id=L8KFjXcTc1AhTCLYNNv4A&client_secret=vnjIfMPW2iU1OXB0BxwyIalAqQT8pyAvw8fXjZDE')
+      $.get('http://api.aerisapi.com/observations/' + location + '?client_id=CLIENT_ID&client_secret=CLIENT_SECRET')
         .then(function(data) {
           // Append the DOM with Aeris API data
           if (data.success) {
@@ -50,7 +50,7 @@
       )
     };
 
-    // Search based on IP location.
+    // Search based on IP location
     $.get("http://ipinfo.io", function(response) {
       zip = response.postal;
       searchAPI(zip);
@@ -65,6 +65,14 @@
       $('#results').empty();
       searchAPI(tempSearch);
     });
+
+    // Reset to IP location
+    $('#local-location').on('click', 'button', function(){
+      $('#results-place').empty();
+      $('#results-icon').empty();
+      $('#results').empty();
+      searchAPI(zip);
+    })
 
   });
 </script>
