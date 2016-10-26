@@ -6,9 +6,9 @@
 
 * The widget should be embeddable in a web page, like so:
 
-  `<script type="text/javascript>
-  var widgetContainer = document.getElementById('current-conditions'); CurrentConditionsWidget(widgetContainer);
-  </script>`
+  `<script type="text/javascript>`
+  `var widgetContainer = document.getElementById('current-conditions');` `CurrentConditionsWidget(widgetContainer);`
+  `</script>`
 
 * To test the widget, you may create a free dev account [here][account-page].
 

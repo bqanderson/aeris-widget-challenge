@@ -1,0 +1,53 @@
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,500" rel="stylesheet">
+<link rel="stylesheet" href="styles/custom.css" media="screen" title="no title">
+
+<!-- weather widget starts -->
+<div class="container">
+  <div id="results-place" class="widget-header underline"></div>
+
+  <div class="widget-main">
+    <div id="results-icon" class="inline"></div>
+
+    <div id="results" class="inline"></div>
+
+    <div class="spacer"></div>
+
+    <div id="search-location" class="inline">
+      <input id="locationSearch" type="text" placeholder="Search for another location..." />
+      <button class="btn-sm" data-type="location">Search</button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div id="local-location" class="inline">
+      <button class="btn-sm" data-type="location">Back to Local</button>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    // Create global var for zip to be used more than once
+    var zip;
+
+    // Get data from Aeris API based on location
+      $.get('http://api.aerisapi.com/observations/minneapolis,mn?client_id=L8KFjXcTc1AhTCLYNNv4A&client_secret=vnjIfMPW2iU1OXB0BxwyIalAqQT8pyAvw8fXjZDE')
+        .then(function(data) {
+          // Append the DOM with Aeris API data
+          if (data.success) {
+            var ob = data.response.ob;
+            var place = data.response.place;
+            $('#results-place').append('<h2>' + place.name + ', <span class="state">' + place.state + '</span></h2>');
+            $('#results-icon').append('<img class="icon inline" src="assets/Aeris_WxIcons_55x55/' + ob.icon + '" />');
+            $('#results').append('<h1>' + ob.tempF + '&deg;</h1><h2>' + ob.weather + '</h2>');
+          } else {
+            alert('An error has occurred. Please double check your location');
+            console.log('Error:', data.error.description);
+          }
+        }
+      )
+
+  });
+</script>
+<!-- weather widget ends -->
