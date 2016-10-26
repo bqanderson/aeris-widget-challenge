@@ -48,13 +48,23 @@
           }
         }
       )
-    }
+    };
 
     // Search based on IP location.
     $.get("http://ipinfo.io", function(response) {
       zip = response.postal;
       searchAPI(zip);
     }, "jsonp");
+
+    // Search based on Input location
+    $('#search-location').on('click', 'button', function(){
+      var tempSearch = $('#locationSearch').val();
+      $('#locationSearch').val(null);
+      $('#results-place').empty();
+      $('#results-icon').empty();
+      $('#results').empty();
+      searchAPI(tempSearch);
+    });
 
   });
 </script>
